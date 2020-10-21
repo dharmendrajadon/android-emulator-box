@@ -58,9 +58,9 @@ RUN install -d ${ANDROID_HOME}  && \
     sdkmanager --sdk_root=${ANDROID_HOME} "emulator" && \
     avdmanager --verbose create avd --force --name "google_pixel" --device "pixel" --package "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86" --tag "google_apis" --abi "x86"
 
-COPY emulator.sh /
+COPY start_emulator.sh /
 
-RUN chmod +x /emulator.sh
+RUN chmod +x /start_emulator.sh
 
 LABEL maintainer="Dharmendra Jadon"
 LABEL org.label-schema.schema-version="1.0"

@@ -27,10 +27,12 @@ RUN apt-get update && \
     unzip \
     lib32stdc++6 \
     lib32z1 \
+    cpu-checker \
     qemu-kvm \
     libvirt-bin \
     ubuntu-vm-builder \
     bridge-utils \
+    ia32-libs-multiarch \
     git \
     openjdk-8-jdk \
     python3.6

@@ -32,7 +32,6 @@ RUN apt-get update && \
     libvirt-bin \
     ubuntu-vm-builder \
     bridge-utils \
-    ia32-libs-multiarch \
     git \
     openjdk-8-jdk \
     python3.6

@@ -55,7 +55,7 @@ RUN install -d ${ANDROID_HOME}  && \
 
 ADD emulator.sh /
 
-RUN chmod +x emulator.sh
+RUN chmod +x ./emulator.sh
 
 LABEL maintainer="Dharmendra Jadon"
 LABEL org.label-schema.schema-version="1.0"

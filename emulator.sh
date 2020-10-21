@@ -2,7 +2,7 @@
 
 function wait_for_emulator() {
   adb devices | grep emulator | cut -f1 | while read line; do adb -s $line emu kill; done
-  emulator -avd test -no-audio -no-boot-anim -no-window -accel on -gpu off -skin 1080x1920 &
+  emulator -avd google_pixel -no-audio -no-boot-anim -no-window -accel on -gpu off -skin 1080x1920 &
 
   boot_completed=false
   while [ "$boot_completed" == false ]; do

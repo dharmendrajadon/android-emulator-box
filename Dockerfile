@@ -10,7 +10,7 @@ ENV ANDROID_HOME="${PWD}/android-home" \
     ANDROID_SDK_TOOLS="6609375" \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-ENV PATH="${PATH}:${ANDROID_HOME}/cmdline-tools/tools/bin/:${ANDROID_HOME}/platform-tools:${JAVA_HOME}/bin/"
+ENV PATH="${PATH}:${ANDROID_HOME}/cmdline-tools/tools/bin/:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/emulator:${JAVA_HOME}/bin/"
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM=dumb \
@@ -49,13 +49,13 @@ RUN install -d ${ANDROID_HOME}  && \
     sdkmanager --sdk_root=${ANDROID_HOME} "platforms;android-${ANDROID_COMPILE_SDK}"  && \
     sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools"  && \
     sdkmanager --sdk_root=${ANDROID_HOME} "build-tools;${ANDROID_BUILD_TOOLS}" && \
-    sdkmanager --sdk_root=${ANDROID_HOME} "system-images;android-*${ANDROID_COMPILE_SDK}*;google_apis;x86" && \
+    sdkmanager --sdk_root=${ANDROID_HOME} "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86" && \
     sdkmanager --sdk_root=${ANDROID_HOME} "emulator" && \
-    avdmanager --sdk_root=${ANDROID_HOME} --verbose create avd --force --name "google_pixel" --device "pixel" --package "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86" --tag "google_apis" --abi "x86"
+    avdmanager --verbose create avd --force --name "google_pixel" --device "pixel" --package "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86" --tag "google_apis" --abi "x86"
 
-ADD emulator.sh /
+COPY emulator.sh /
 
-RUN chmod +x ./emulator.sh
+RUN chmod +x /emulator.sh
 
 LABEL maintainer="Dharmendra Jadon"
 LABEL org.label-schema.schema-version="1.0"

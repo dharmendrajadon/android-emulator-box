@@ -48,7 +48,14 @@ RUN install -d ${ANDROID_HOME}  && \
     set -o pipefail  && \
     sdkmanager --sdk_root=${ANDROID_HOME} "platforms;android-${ANDROID_COMPILE_SDK}"  && \
     sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools"  && \
-    sdkmanager --sdk_root=${ANDROID_HOME} "build-tools;${ANDROID_BUILD_TOOLS}"
+    sdkmanager --sdk_root=${ANDROID_HOME} "build-tools;${ANDROID_BUILD_TOOLS}" && \
+    sdkmanager --sdk_root=${ANDROID_HOME} "system-images;android-*${ANDROID_COMPILE_SDK}*;google_apis;x86" && \
+    sdkmanager --sdk_root=${ANDROID_HOME} "emulator" && \
+    avdmanager --sdk_root=${ANDROID_HOME} --verbose create avd --force --name "google_pixel" --device "pixel" --package "system-images;android-${ANDROID_COMPILE_SDK};google_apis;x86" --tag "google_apis" --abi "x86"
+
+ADD emulator.sh /
+
+RUN chmod +x emulator.sh
 
 LABEL maintainer="Dharmendra Jadon"
 LABEL org.label-schema.schema-version="1.0"
